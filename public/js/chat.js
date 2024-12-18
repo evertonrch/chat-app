@@ -50,5 +50,5 @@ server.on("linkPosition", (message) => {
         url: message.url,
         createdAt: moment(message.createdAt).format("h:mm a")
      })
-    $position.innerHTML || $position.insertAdjacentHTML("beforeend", html)
+    $messages.insertAdjacentHTML("beforeend", html)
 })

@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.min.css">
     <title>Chat App</title>
 </head>
+
 <body>
-    <h1>Chat App</h1>
+    <div class="chat">
+        <div class="chat__sidebar"></div>
+        <div class="chat__main">
+            <div id="messages" class="chat__messages"></div>
 
-    <div id="messages"></div>
+            <div class="compose">
+                <form class="form">
+                    <input type="text">
+                    <button type="submit">send</button>
+                </form>
+                <button id="send-location" class="btn">send location</button>
+            </div>
 
-    <form class="form">
-        <input type="text">
-        <button type="submit">send</button>
-    </form>
-    <button id="send-location" class="btn">send location</button>
-
-    <div id="position"></div>
+        </div>
+    </div>
 
     <script id="message-template" type="text/html">
-        <div>
-            <p>{{ createdAt }} - {{ message }}</p>
+        <div class="message">
+            <p>
+                <span class="message__name">Static name for now</span>
+                <span class="message__meta">{{ createdAt }}</span>
+            </p>
+            <p>{{ message }}</p>
         </div>
     </script>
 
     <script id="position-template" type="text/html">
-        <a href={{ url }} target="_blank" style="text-decoration: none;">Link - {{ createdAt }}</a>
+        <p>
+            <span class="message__name">Static name for now</span>
+            <span class="message__meta">{{ createdAt }}</span>
+        </p>
+        <p><a href={{ url }} target="_blank">Current location</a></p>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
@@ -34,4 +50,5 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
 </body>
+
 </html>
