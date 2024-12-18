@@ -40,15 +40,15 @@ $buttonLocation.addEventListener("click", () => {
     navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords
         server.emit("position", { latitude, longitude }, (message) => {
-
             $buttonLocation.removeAttribute("disabled")
         })
     })
 })
 
-server.on("linkPosition", ({ latitude, longitude }) => {
-    const url = `https://google.com/maps?q=${latitude},${longitude}`
-    const html = Mustache.render(positionTemplate, { url })
-    $position.innerHTML = ""
-    $position.insertAdjacentHTML("beforeend", html)
+server.on("linkPosition", (message) => {
+    const html = Mustache.render(positionTemplate, { 
+        url: message.url,
+        createdAt: moment(message.createdAt).format("h:mm a")
+     })
+    $position.innerHTML || $position.insertAdjacentHTML("beforeend", html)
 })

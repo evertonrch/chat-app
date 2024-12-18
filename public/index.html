@@ -15,7 +15,7 @@
         <button type="submit">send</button>
     </form>
     <button id="send-location" class="btn">send location</button>
-    <a class="location">Link</a>
+
     <div id="position"></div>
 
     <script id="message-template" type="text/html">
@@ -25,7 +25,7 @@
     </script>
 
     <script id="position-template" type="text/html">
-        <a href={{ url }} target="_blank">Link</a>
+        <a href={{ url }} target="_blank" style="text-decoration: none;">Link - {{ createdAt }}</a>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
