@@ -50,10 +50,12 @@ $messageForm.addEventListener("submit", (e) => {
     const message = $messageInput.value
 
     server.emit("sendMessage", message, (error) => {
+        $messageInput.value = ""
+        $messageInput.focus()
+        
         if (error) {
-            return console.log(error)
+            return alert(error)
         }
-        console.log("delivered")
     })
 })
 
