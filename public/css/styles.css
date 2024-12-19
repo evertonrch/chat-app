@@ -131,6 +131,7 @@ button:disabled {
 
 .message a {
     color: #0070CC;
+    text-decoration: none;
 }
 
 /* Message Composition Styles */
