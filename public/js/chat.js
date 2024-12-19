@@ -13,6 +13,9 @@ const $position = document.querySelector("#position")
 const messageTemplate = document.querySelector("#message-template").innerHTML
 const positionTemplate = document.querySelector("#position-template").innerHTML
 
+// query string parser
+const {username, room} = Qs.parse(location.search, { ignoreQueryPrefix: true })
+
 server.on("message", (message) => {
     const html = Mustache.render(messageTemplate, {
         message: message.text,
@@ -51,4 +54,11 @@ server.on("linkPosition", (message) => {
         createdAt: moment(message.createdAt).format("h:mm a")
      })
     $messages.insertAdjacentHTML("beforeend", html)
+})
+
+server.emit("join", {username, room}, (error) => {
+    if(error) {
+        alert(error)
+        location.href = "/"
+    }
 })
