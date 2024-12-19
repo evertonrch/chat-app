@@ -62,12 +62,16 @@ $messageForm.addEventListener("submit", (e) => {
 $buttonLocation.addEventListener("click", () => {
     $buttonLocation.setAttribute("disabled", "disabled")
 
-    navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords
-        server.emit("position", { latitude, longitude }, (message) => {
-            $buttonLocation.removeAttribute("disabled")
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords
+            server.emit("position", { latitude, longitude }, (message) => {
+                $buttonLocation.removeAttribute("disabled")
+            })
         })
-    })
+    } else {
+        alert("could not shared location!")
+    }
 })
 
 server.on("linkPosition", (message) => {
