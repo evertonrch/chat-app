@@ -1,4 +1,4 @@
-const server = io()
+const socket = io()
 
 // elements
 const $messageForm = document.querySelector(".form")
@@ -34,7 +34,7 @@ const autoscroll = () => {
     }
 }
 
-server.on("message", (message) => {
+socket.on("message", (message) => {
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
@@ -49,7 +49,7 @@ $messageForm.addEventListener("submit", (e) => {
 
     const message = $messageInput.value
 
-    server.emit("sendMessage", message, (error) => {
+    socket.emit("sendMessage", message, (error) => {
         $messageInput.value = ""
         $messageInput.focus()
         
@@ -65,7 +65,7 @@ $buttonLocation.addEventListener("click", () => {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords
-            server.emit("position", { latitude, longitude }, (message) => {
+            socket.emit("position", { latitude, longitude }, (message) => {
                 $buttonLocation.removeAttribute("disabled")
             })
         })
@@ -74,7 +74,7 @@ $buttonLocation.addEventListener("click", () => {
     }
 })
 
-server.on("linkPosition", (message) => {
+socket.on("linkPosition", (message) => {
     const html = Mustache.render(positionTemplate, {
         username: message.username,
         url: message.url,
@@ -84,7 +84,7 @@ server.on("linkPosition", (message) => {
     autoscroll()
 })
 
-server.on("roomData", ({room, users}) => {
+socket.on("roomData", ({room, users}) => {
    const html = Mustache.render(sidebarTemplate, {
         room,
         users
@@ -92,7 +92,7 @@ server.on("roomData", ({room, users}) => {
    $sidebar.innerHTML = html
 })
 
-server.emit("join", {username, room}, (error) => {
+socket.emit("join", {username, room}, (error) => {
     if(error) {
         alert(error)
         location.href = "/"
