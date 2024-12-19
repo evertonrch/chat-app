@@ -7,11 +7,13 @@ const $buttonLocation = document.querySelector("#send-location")
 const $locationLink = document.querySelector(".link")
 const $messages = document.querySelector("#messages")
 const $position = document.querySelector("#position")
+const $sidebar = document.querySelector("#sidebar")
 
 
 // templates
 const messageTemplate = document.querySelector("#message-template").innerHTML
 const positionTemplate = document.querySelector("#position-template").innerHTML
+const sidebarTemplate = document.querySelector("#sidebar-template").innerHTML
 
 // query string parser
 const {username, room} = Qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -56,6 +58,14 @@ server.on("linkPosition", (message) => {
         createdAt: moment(message.createdAt).format("h:mm a")
      })
     $messages.insertAdjacentHTML("beforeend", html)
+})
+
+server.on("roomData", ({room, users}) => {
+   const html = Mustache.render(sidebarTemplate, {
+        room,
+        users
+   })
+   $sidebar.innerHTML = html
 })
 
 server.emit("join", {username, room}, (error) => {
