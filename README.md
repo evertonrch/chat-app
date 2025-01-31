@@ -35,3 +35,8 @@ Este é um projeto de **chat em tempo real** desenvolvido utilizando **Node.js**
   ```
   npm start
   ```
+
+4. A aplicação estará disponível em (a porta pode ser alterada via variável de ambiente definida em PORT):
+  ```
+  http://localhost:3000
+  ```
