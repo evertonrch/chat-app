@@ -17,3 +17,21 @@ Este é um projeto de **chat em tempo real** desenvolvido utilizando **Node.js**
 - **Moment.js**: Formatação e manipulação de datas para timestamps.
 - **Mustache.js**: Template engine para renderizar HTML dinâmico.
 - **Express.js**: Framework para gerenciar rotas e configurações do servidor.
+
+## ⚙️ Instalação e Configuração
+
+1. Clone o repositório:
+  ```
+  git clone https://github.com/evertonrch/chat-app.git
+  cd chat-app
+  ```
+
+2. Baixe as dependências do projeto:
+  ```
+  npm install
+  ```
+
+3. Rode o projeto:
+  ```
+  npm start
+  ```
